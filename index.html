@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Construction Materials Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🛣️ Road Construction Materials Calculator</h1>
+            <p>Calculate materials needed to lay a road</p>
+        </header>
+
+        <main>
+            <div class="calculator-section">
+                <h2>Road Dimensions</h2>
+                <form id="calculatorForm">
+                    <div class="form-group">
+                        <label for="length">Road Length (meters)</label>
+                        <input type="number" id="length" placeholder="Enter road length" min="1" required>
+                        <span class="unit">m</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="width">Road Width (meters)</label>
+                        <input type="number" id="width" placeholder="Enter road width" min="1" required>
+                        <span class="unit">m</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="thickness">Bitumen Layer Thickness (cm)</label>
+                        <input type="number" id="thickness" placeholder="Enter thickness" min="1" value="5" required>
+                        <span class="unit">cm</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="baseThickness">Base Layer Thickness (cm)</label>
+                        <input type="number" id="baseThickness" placeholder="Enter base thickness" min="1" value="15" required>
+                        <span class="unit">cm</span>
+                    </div>
+
+                    <button type="submit" class="btn-calculate">Calculate Materials</button>
+                    <button type="reset" class="btn-reset">Clear Form</button>
+                </form>
+            </div>
+
+            <div id="resultsContainer" class="results-container hidden">
+                <h2>📊 Materials Required</h2>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-icon">🛢️</div>
+                        <h3>Bitumen</h3>
+                        <div class="result-value" id="bitumenResult">0</div>
+                        <div class="result-unit">Tonnes</div>
+                        <div class="result-details">
+                            <small id="bitumenVolume">Volume: 0 m³</small>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🧤</div>
+                        <h3>Gloves (Rubber)</h3>
+                        <div class="result-value" id="glovesResult">0</div>
+                        <div class="result-unit">Pairs</div>
+                        <div class="result-details">
+                            <small>For workforce protection</small>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🪨</div>
+                        <h3>Gravel/Aggregate</h3>
+                        <div class="result-value" id="gravelResult">0</div>
+                        <div class="result-unit">Tonnes</div>
+                        <div class="result-details">
+                            <small id="gravelVolume">Volume: 0 m³</small>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🏜️</div>
+                        <h3>Sand</h3>
+                        <div class="result-value" id="sandResult">0</div>
+                        <div class="result-unit">Tonnes</div>
+                        <div class="result-details">
+                            <small id="sandVolume">Volume: 0 m³</small>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🛡️</div>
+                        <h3>Safety Equipment</h3>
+                        <div class="result-value" id="safetyResult">0</div>
+                        <div class="result-unit">Sets</div>
+                        <div class="result-details">
+                            <small>Helmets, vests, etc.</small>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🧹</div>
+                        <h3>Brooms & Tools</h3>
+                        <div class="result-value" id="toolsResult">0</div>
+                        <div class="result-unit">Quantity</div>
+                        <div class="result-details">
+                            <small>Sweeping & maintenance</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-section">
+                    <h3>📋 Project Summary</h3>
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Road Area:</span>
+                            <strong id="areaResult">0</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Total Workers (estimated):</span>
+                            <strong id="workersResult">0</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Estimated Project Days (10 workers):</span>
+                            <strong id="daysResult">0</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Cost Estimate (USD):</span>
+                            <strong id="costResult">$0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="breakdown-section">
+                    <h3>💰 Cost Breakdown</h3>
+                    <table class="breakdown-table">
+                        <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Rate</th>
+                                <th>Total Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody id="breakdownTableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <button class="btn-print" onclick="window.print()">🖨️ Print Results</button>
+                <button class="btn-export" onclick="exportToCSV()">📥 Export as CSV</button>
+            </div>
+
+            <div class="info-section">
+                <h2>📚 Material Information</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>Bitumen</h4>
+                        <p>Hot mix asphalt for road surface. Typical density: 2.3 tonnes/m³</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Gravel/Aggregate</h4>
+                        <p>Base layer material. Typical density: 1.5 tonnes/m³</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Sand</h4>
+                        <p>Sub-base layer. Typical density: 1.6 tonnes/m³</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Safety Equipment</h4>
+                        <p>One set per 20 m² of work area for worker safety compliance</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Road Construction Materials Calculator | Developed for Construction Planning</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

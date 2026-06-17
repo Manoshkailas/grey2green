@@ -1,0 +1,28 @@
+{
+  "name": "road-construction-calculator",
+  "version": "1.0.0",
+  "description": "A comprehensive web-based application for calculating materials needed to lay roads",
+  "main": "index.html",
+  "scripts": {
+    "start": "open index.html"
+  },
+  "keywords": [
+    "road-construction",
+    "materials-calculator",
+    "bitumen",
+    "gravel",
+    "construction",
+    "web-app"
+  ],
+  "author": "Road Construction Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/road-construction-calculator"
+  },
+  "technologies": [
+    "HTML5",
+    "CSS3",
+    "JavaScript (Vanilla)"
+  ]
+}
